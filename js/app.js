@@ -1,6 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const navbar = document.querySelector("#navbar__list");
-  const sections = document.querySelectorAll("section");
+const createNavbar = (sections) => {
+  const emptyNavbar = document.querySelector("#navbar__list");
   const navItems = document.createDocumentFragment();
 
   sections.forEach((section) => {
@@ -18,8 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     navItems.appendChild(navItem);
   });
 
-  navbar.appendChild(navItems);
+  emptyNavbar.appendChild(navItems);
+};
 
+const toggleActiveSections = (sections) => {
   document.addEventListener("scroll", () => {
     sections.forEach((section) => {
       const sectionPosition = section.getBoundingClientRect().top;
@@ -30,6 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+};
+
+const buildScrolling = () => {
+  const navbar = document.querySelector("#navbar__list");
 
   navbar.addEventListener("click", (event) => {
     event.preventDefault();
@@ -40,4 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
       block: "center",
     });
   });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+
+  createNavbar(sections);
+
+  toggleActiveSections(sections);
+
+  buildScrolling();
 });
