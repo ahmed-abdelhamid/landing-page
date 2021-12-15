@@ -4,10 +4,15 @@ const toggleActiveSections = () => {
 
   sections.forEach((section) => {
     const sectionPosition = section.getBoundingClientRect().top;
+    const sectionId = section.getAttribute("id");
+    const link = document.querySelector(`[href="#${sectionId}"]`);
+
     if (sectionPosition < 300 && sectionPosition > -500) {
       section.classList.add("active");
+      link.classList.add("active");
     } else {
       section.classList.remove("active");
+      link.classList.remove("active");
     }
   });
 };
